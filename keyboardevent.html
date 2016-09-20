@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			ul{
+				margin: 0;
+				padding: 0;
+			}
+			li{
+				width: 100px;
+				height: 30px;
+				line-height: 30px;
+				text-align: center;
+				list-style: none;
+				border: 1px solid black;
+			}
+			#div1{
+				width: 100px;
+				height: 80px;
+				padding-top: 20px;
+				text-align: center;
+				float: left;
+				border: 1px solid black;
+				margin-right: 10px;
+			}
+			#txt{
+				display: block;
+				font-size: 14px;
+			}
+			#div2{
+				width: 100px;
+				height: 100px;
+				background: pink;
+				float: left;
+			}
+			#list{
+				width: 100px;
+				background-color: gainsboro;
+				display: none;
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+		</style>
+		<script type="text/javascript">
+			//模拟右键菜单,使用addEventListener方式写,在菜单中加入一些选项,在document中加入一些元素,点击不同元素显示不同内容
+			window.onload = function(){
+				var list = document.getElementById('list');
+				var div1 = document.getElementById('div1');
+				var div2 = document.getElementById('div2');
+				var data = [];
+				div1.addEventListener('contextmenu',function(e){
+					e.preventDefault()
+					list.style.display = 'block';
+					list.style.top = e.clientY + 'px';
+					list.style.left = e.clientX + 'px';
+					var li = document.createElement('li');
+					list.innerHTML = 
+					'<li>复制</li>'+
+					'<li>粘贴</li>'+
+					'<li>删除</li>'+
+					'<li>跳转</li>';
+					e.cancelBubble = true;
+				});
+				div2.addEventListener('contextmenu',function(e){
+					e.preventDefault()
+					list.style.display = 'block';
+					list.style.top = e.clientY + 'px';
+					list.style.left = e.clientX + 'px';
+					var li = document.createElement('li');
+					list.innerHTML = 
+					'<li>黑色</li>'+
+					'<li>蓝色</li>'+
+					'<li>紫色</li>'+
+					'<li>红色</li>';
+					e.cancelBubble = true;
+				});
+				document.addEventListener('contextmenu',function(e){
+					e.preventDefault()
+					list.style.display = 'block';
+					list.style.top = e.clientY + 'px';
+					list.style.left = e.clientX + 'px';
+					var li = document.createElement('li');
+					list.innerHTML = 
+					'<li>剪切</li>'+
+					'<li>粘贴</li>'+
+					'<li>下载</li>'+
+					'<li>检查</li>';
+				});
+				document.onclick = function(){
+					list.style.display = 'none';
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id="div1">
+			<img src="img/folder.png"/>
+			<span id="txt">隐藏文件</span>
+		</div>
+		<div id="div2"></div>
+		<ul id="list"></ul>
+	</body>
+</html>
